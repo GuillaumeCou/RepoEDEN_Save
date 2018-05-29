@@ -2,7 +2,6 @@
 #include <LoRa.h>
 #include <SoftwareSerial.h>
 
-const byte LEDPIN = 4;
 const byte INTERRUPTPIN = 3;
 volatile byte STATE = LOW;
 const int taille_msg = 26;
@@ -19,7 +18,6 @@ SoftwareSerial mySerial(5, 4); // RX //  TX
 void setup() {
   // DEL & interruption
   Serial.begin(9600);
-  //pinMode(LEDPIN, OUTPUT);
   pinMode(INTERRUPTPIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(INTERRUPTPIN), blink, RISING);
 
@@ -35,8 +33,6 @@ void setup() {
   // Bluetooth
   Serial.begin(9600);
   mySerial.begin(9600);
-
-  //digitalWrite(LEDPIN, STATE);
 }
 
 void envoyer() {
