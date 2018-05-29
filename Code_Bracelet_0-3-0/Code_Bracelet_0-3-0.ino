@@ -4,7 +4,6 @@
 
 const byte INTERRUPTPIN = 3;
 volatile byte STATE = LOW;
-const int taille_msg = 26;
 
 int counter = 0;
 const int temps_attente_BT = 30;
@@ -53,11 +52,15 @@ void blink() {
 }
 
 void alarme_BT() {
-  mySerial.println("Alerte");
+  char mot[] = {"Alert"};
+  for(int i = 0; i < 5; i++){
+    mySerial.print(mot[i]);
+  }
 }
 
+
 void loop() {
-  digitalWrite(LEDPIN, STATE)
+
   if(STATE)
   {
     alarme_BT();

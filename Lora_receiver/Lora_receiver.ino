@@ -36,6 +36,10 @@ void loop() {
     Serial.println(LoRa.packetRssi());
   }
   if( (millis() - temps) > 1000 ) {
+    digitalWrite(3, HIGH);
+  }
+  else
+  {
     digitalWrite(3, LOW);
   }
 }
