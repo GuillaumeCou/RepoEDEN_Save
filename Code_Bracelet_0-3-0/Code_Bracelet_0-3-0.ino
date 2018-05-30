@@ -68,7 +68,7 @@ void loop() {
 
   if(STATE)
   {
-    //alarme_BT();
+    alarme_BT();
     envoyer();
     
   }
