@@ -32,6 +32,8 @@ void setup() {
   // Bluetooth
   Serial.begin(9600);
   mySerial.begin(9600);
+
+  STATE = LOW;
 }
 
 void envoyer() {
@@ -52,9 +54,12 @@ void blink() {
 }
 
 void alarme_BT() {
-  char mot[] = {"Alert"};
-  for(int i = 0; i < 5; i++){
+  if(mySerial.available())
+  {
+      char mot[] = {"Alert"};
+      for(int i = 0; i < 5; i++){
     mySerial.print(mot[i]);
+  }
   }
 }
 
@@ -63,7 +68,7 @@ void loop() {
 
   if(STATE)
   {
-    alarme_BT();
+    //alarme_BT();
     envoyer();
     
   }

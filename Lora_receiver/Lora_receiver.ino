@@ -1,11 +1,14 @@
 #include <SPI.h>
 #include <LoRa.h>
-byte STATE = LOW;
-int temps;
+
+unsigned long temps;
+const int LEDPIN = 3;
+
+
 void setup() {
-  pinMode(3, OUTPUT);
-  digitalWrite(3, LOW);
-  
+  pinMode(LEDPIN, OUTPUT);
+  digitalWrite(LEDPIN, LOW);
+
   Serial.begin(9600);
   while (!Serial);
 
@@ -17,11 +20,13 @@ void setup() {
   }
 }
 
+
 void loop() {
   // try to parse packet
   int packetSize = LoRa.parsePacket();
+
   if (packetSize) {
-    digitalWrite(3, HIGH);
+    digitalWrite(LEDPIN, HIGH);
     temps = millis();
     // received a packet
     Serial.print("Received packet '");
@@ -35,11 +40,10 @@ void loop() {
     Serial.print("' with RSSI ");
     Serial.println(LoRa.packetRssi());
   }
-  if( (millis() - temps) > 1000 ) {
-    digitalWrite(3, HIGH);
-  }
   else
   {
-    digitalWrite(3, LOW);
+    if ((millis() - temps) >= 500) {
+      digitalWrite(LEDPIN, LOW);
+    }
   }
 }
